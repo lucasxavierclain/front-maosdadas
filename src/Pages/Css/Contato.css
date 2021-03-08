@@ -1,0 +1,19 @@
+.box-menu{
+    background-color:rgba(228, 126, 126, 0.932) ;
+    border-radius: 8px;  
+}
+
+.contato{
+  width: 80%;
+}
+
+.container2{
+  display:inline block;
+  float:right;
+  margin-top: -40px
+}
+@media(max-width:780px){
+  .imagem-contato{
+    display: none;
+  }
+}
