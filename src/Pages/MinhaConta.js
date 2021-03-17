@@ -2,19 +2,20 @@ import Menu from '../Componentes/Menu/Menu';
 import React from 'react'
 import './Css/MinhaConta.css'
 import Sair from '../Sair'
-import {BsPersonSquare} from 'react-icons/bs';
-import {BiCommentEdit, BiBriefcase, BiFoodMenu, BiCloudLightning} from 'react-icons/bi';
+import { BsPersonSquare } from 'react-icons/bs';
+import { BiCommentEdit, BiBriefcase, BiFoodMenu, BiCloudLightning } from 'react-icons/bi';
 import { FiEdit, FiInstagram, FiFacebook, FiTwitter } from 'react-icons/fi';
 import RodapeGeral from '../Componentes/Rodape/RodapeGeral'
+import Itens from '../Componentes/ItensMinhaConta/Itens';
 const MinhaConta = () => {
-    const dados=JSON.parse(localStorage.getItem('id'))
+    const dados = JSON.parse(localStorage.getItem('id'))
     const [action, setAction] = React.useState('');
-    
-    React.useEffect(async()=>{
+
+    React.useEffect(async () => {
 
         const url = await fetch(`http://localhost:3005/minhaconta/${dados.username}`)
-        .then(resposta=> resposta.json())
-        .then(resposta=> console.log(resposta))    
+            .then(resposta => resposta.json())
+            .then(resposta => setAction(resposta))
     }, []);
     return (
         <>
@@ -26,14 +27,14 @@ const MinhaConta = () => {
                         <div className="row z-depth-3 boxPerfil">
                             <div className="col-sm-4 bg-info rounded-left">
                                 <div className="card-block text-center text-white">
-                                    <BsPersonSquare className="iconMinhaConta mt-5"/>
+                                    <BsPersonSquare className="iconMinhaConta mt-5" />
                                     <h2 className="font-weight-bold mt-4">{dados.nome}</h2>
                                     <p>Profissao</p>
-                                    <FiEdit className="fiEdit mb-3"/>
+                                    <FiEdit className="fiEdit mb-3" />
                                     <ul className="list-unstyled d-flex justify-content-center mt-4">
-                                        <li><a href="#"> <FiFacebook className="iconContatoConta"/> </a></li>
-                                        <li><a href="#"> <FiTwitter className="iconContatoConta"/> </a></li>
-                                        <li><a href="#"> <FiInstagram className="iconContatoConta"/> </a></li>
+                                        <li><a href="#"> <FiFacebook className="iconContatoConta" /> </a></li>
+                                        <li><a href="#"> <FiTwitter className="iconContatoConta" /> </a></li>
+                                        <li><a href="#"> <FiInstagram className="iconContatoConta" /> </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -65,25 +66,27 @@ const MinhaConta = () => {
                                 <div className="row text-center mb-3">
                                     <div className="col-sm-4">
                                         <p className="font-weight-bold">Cadastrar Produtos</p>
-                                        <h6 className="text-muted"><a href="/cadastrarprodutos"><BiFoodMenu className='icon-minha-conta'/></a></h6>
+                                        <h6 className="text-muted"><a href="/cadastrarprodutos"><BiFoodMenu className='icon-minha-conta' /></a></h6>
                                     </div>
                                     <div className="col-sm-4">
                                         <p className="font-weight-bold">Cadastrar Serviço</p>
-                                        <h6 className="text-muted"><a href="/cadastrarservicos"><BiBriefcase className='icon-minha-conta'/></a></h6>
+                                        <h6 className="text-muted"><a href="/cadastrarservicos"><BiBriefcase className='icon-minha-conta' /></a></h6>
                                     </div>
 
                                     <div className="col-sm-4">
                                         <p className="font-weight-bold">Editar Dados</p>
-                                        <h6 className="text-muted"><a href="/editardados" ><BiCommentEdit className='icon-minha-conta'/></a></h6>
+                                        <h6 className="text-muted"><a href="/editardados" ><BiCommentEdit className='icon-minha-conta' /></a></h6>
                                     </div>
-                                </div>                                                          
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        <RodapeGeral/>
+            <div className='container'>
+                {action && action.produto.map(mapear => <Itens  categoria={mapear.categoria} valor={mapear.valor} descricao={mapear.descricao} />)}
+            </div>
+            <RodapeGeral />
         </>
     )
 }

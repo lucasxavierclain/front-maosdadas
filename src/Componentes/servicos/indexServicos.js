@@ -12,9 +12,9 @@ const IndexServicos = (props) => {
     return(
             <>
                 <div className="card servico">
-                        <div className="imgBox">
+                        {/* <div className="imgBox">
                             <img className="img-img" src={require(`../../Imagens/Servicos/${props.imagem}`).default} />
-                        </div>
+                        </div> */}
                         <div className="details">
                             <div className="text-content">
                                 <h3 className="textH3">{props.servico}</h3>
@@ -24,7 +24,7 @@ const IndexServicos = (props) => {
                             <h4 className="textH4">Para mais informações, clique no círculo do card.</h4>
 
                             <div className='container container-fluid d-flex justify-content-around'>
-                            {Autenticacao() ? <button className='btnServicoDeletar' onClick={deletar}>Deletar</button> : <></>}
+                           
 
                         <button className="btnServico " type="button">Contato</button>
                     </div>

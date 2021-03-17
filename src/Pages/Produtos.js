@@ -15,11 +15,12 @@ const Produtos = () => {
     
     React.useEffect(async()=>{
 
-        const url = await fetch('http://localhost:3005/produtos');    
-        const urlResponse = await url.json();
+        const url = await fetch('http://localhost:3005/produtos')    
+        .then(resposta=> resposta.json())
+        .then(resposta =>setAction(resposta))
+        
 
-        setAction(urlResponse);
-        console.log(action);
+    
     }, []);
 
     return (
@@ -79,7 +80,7 @@ const Produtos = () => {
                         </div>
                     </div>
                     <div className="col-md-12 col-lg-11 col-xs-12 box-produto mb-5" id="">                     
-                        {action && action.map(mapear => <IndexProduto username={mapear.username} nome={mapear.nome} email={mapear.email} produto={mapear.produto} categoria={mapear.categoria} valor={mapear.valor} descricao={mapear.descricao} telefone={mapear.celular} imagem={mapear.imagem} />)}                       
+                        {action && action.produto.map(mapear => <IndexProduto username={mapear.username} nome={mapear.nome} email={mapear.email} produto={mapear.produto} categoria={mapear.categoria} valor={mapear.valor} descricao={mapear.descricao} telefone={mapear.celular} imagem={mapear.imagem} />)}                       
                     </div>
                 </div>
             </div>

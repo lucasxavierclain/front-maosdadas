@@ -23,7 +23,7 @@ const IndexProduto = (props)=>{
                             <h4 className="textH4">Para mais informações, clique no círculo do card.</h4>
 
                             <div className='container container-fluid d-flex justify-content-around'>
-                            {Autenticacao() ? <button className='btnServicoDeletar ' onClick={deletar}>Deletar</button> : <></>}
+                           
 
                         <button className="btnProduto" type="button">Contato</button>
                     </div>

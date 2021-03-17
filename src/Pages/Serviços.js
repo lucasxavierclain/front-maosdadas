@@ -10,11 +10,12 @@ const Servicos = () => {
     
     React.useEffect(async()=>{
 
-        const url = await fetch('http://localhost:3005/servicos');    
-        const urlResponse = await url.json();
+       
+        const url = await fetch('http://localhost:3005/servicos')    
+        .then(resposta=> resposta.json())
+        .then(resposta =>setAction(resposta))
+        
 
-        setAction(urlResponse);
-        console.log(action);
     }, []);
      return (
     <>
@@ -73,7 +74,7 @@ const Servicos = () => {
                         </div>
                     </div>
                     <div className="col-md-12 col-lg-11 col-xs-12 box-servico mb-5" id="">  
-                        {action && action.map(mapear => <IndexServicos username={mapear.username} nome={mapear.nome} email={mapear.email} servico={mapear.servico} categoria={mapear.categoria} valor={mapear.valor} descricao={mapear.descricao} telefone={mapear.celular} imagem={mapear.imagem} />)}  
+                        {action && action.servico.map(mapear => <IndexServicos username={mapear.username} nome={mapear.nome} email={mapear.email} servico={mapear.servico} categoria={mapear.categoria} valor={mapear.valor} descricao={mapear.descricao} telefone={mapear.celular} imagem={mapear.imagem} />)}  
                     </div>
                 </div>
             </div>
